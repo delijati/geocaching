@@ -29,7 +29,7 @@ def gclogin(username, password):
     if loginok == 0:
         data = do_auth(username, password)
         response = data.text
-        if '"isAuthenticated": true' in response:
+        if '"isValidated":true' in response:
             data = "username=" + username  + "\npassword=" + password + "\n"
             files.write_file("geocaching.ini", data)
             loginok = 1
@@ -137,6 +137,7 @@ def do_auth(username, password):
 
     url = "https://www.geocaching.com/account/signin"
     html = SESSION.get(url)
+    print(html)
 
     token_field = html.text.split('__RequestVerificationToken', 1)[1]
     token_field = token_field.split('value="', 1)[1].split('"', 1)[0].strip()
@@ -157,7 +158,7 @@ def is_logged_in():
     url = "https://www.geocaching.com/play/search"
     html = SESSION.get(url)
 
-    if '"isAuthenticated": true' in html.text:
+    if '"isValidated":true' in html.text:
         print("User logged in, skipping re-auth")
         return [1, html.text]
 
@@ -279,7 +280,7 @@ def dl_cache(cacheid):
         return "bombed out, are we still logged in?"
 
     # TODO: check if cache is not found, 404 page doesnt show logged in user menu
-    if '"isAuthenticated": true' not in data:
+    if '"isValidated":true' not in data:
         print("bombed out, are we still logged in?")
         return "bombed out, are we still logged in?"
 
@@ -414,7 +415,7 @@ def get_cache_list(lat, lon):
         print(error)
         return None
 
-    if '"isAuthenticated": true' not in data:
+    if '"isValidated":true' not in data:
         print("bombed out, are we still logged in?")
         return None
 
@@ -507,7 +508,7 @@ def get_cache_page(conn, cacheid, url):
         html = SESSION.get(url)
         data = html.text
 
-        if '"isAuthenticated": true' not in data:
+        if '"isValidated":true' not in data:
             print("bombed out, are we still logged in?")
             return None
 

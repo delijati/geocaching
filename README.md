@@ -4,6 +4,27 @@ An app for using geocaching.com(unofficial) on Ubuntu Touch, designed to be simi
 
 This is a community maintained project that I do in my free time. While all efforts are taken to test everything works, in some cases things get overlooked. If you spot a problem please try to fix it and contribute where you can. If you aren't able to fix the issue, please file a bug under issues so we can track the progress and resolution of the problem.
 
+## Develop
+
+Install deps:
+
+    $ pip install clickable-ut
+
+Start:
+
+    $ clickable desktop [--no-nvidia]
+
+Build:
+
+    $ clickable build
+
+Test the click app directly with the device:
+
+    Attach device to computer with usb
+    Activate developer mode on device and authorize device 
+
+    $ clickable
+
 ## License
 
 Source code is made available under the GPLv3 license, in the hope the code might be useful to others. See [LICENSE](LICENSE) for details.
